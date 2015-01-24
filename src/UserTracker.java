@@ -299,6 +299,7 @@ public class UserTracker extends JPanel implements Runnable, GesturesWatcher
   {
     if (isActivated)
       System.out.println(gest + " " + userID + " on");
+    
     else
       System.out.println("                        " + gest + " " + userID + " off");
   }  // end of pose()

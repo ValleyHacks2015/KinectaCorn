@@ -7,7 +7,7 @@ public class PatchMap {
 	int userID;
 	ArrayList<GestureName> gestureList = new ArrayList<GestureName>();
 	ArrayList<String> shredList; //TODO initialize <---
-	HashMap gestureToShred;
+	HashMap<GestureName, String> gestureToShred = new HashMap<GestureName, String>();
 	/*
 	gestureList.add();
 	
