@@ -16,20 +16,20 @@ while(true){
 
     // set the play position to beginning
     0 => bass.pos;
-    0.5::T => now;
+    0.25::second => now;
     0 => hihat.pos;
-    0.5::T => now;
+    0.25::second => now;
     0 => snare.pos;
-    0.5::T => now;
+    0.25::second => now;
     0 => hihat.pos;
-    1::T => now;
+    0.5::second => now;
     0 => hihat.pos;
-    0.5::T => now;
+    0.25::second => now;
     0 => snare.pos;
-    0.5::T => now;
+    0.25::second => now;
     0 => hihat.pos;
-    0.25::T => now;
-    0 => hihat.pos;
-    0.25::T => now;
+    0.25::second => now;
+//    0 => hihat.pos;
+//    0.25::second => now;
 
 }
