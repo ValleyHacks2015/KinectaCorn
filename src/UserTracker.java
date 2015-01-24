@@ -1,4 +1,39 @@
-//Gorillas tracker!
-public class UserTracker {
+//Based off Andrew Davison's open source project
 
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.io.*;
+
+public class UserTracker extends JFrame {
+
+	private Driver trackPanel;
+	
+	public UserTracker() {
+		super("User Tracker");
+		
+		Container c = getContentPane();
+		c.setLayout(new BorderLayout());
+		
+		trackPanel = new Driver();
+		c.add(trackPanel, BorderLayout.CENTER);
+		
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) 
+			{ trackPanel.closeDown(); }
+		});
+		
+		pack();
+		setResizable(false);
+		setLocationRelativeTo(null);
+		setVisible(true);
+	} 
+	
+	
+	public static void main(String args[]) {
+		new UserTracker();
+	}
+	
+	
+	
 }
