@@ -1,4 +1,4 @@
-.5::second => dur T;
+2::second => dur T;
 T - (now % T) => now;
 
 float o1;
