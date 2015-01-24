@@ -410,7 +410,6 @@ public class Skeletons
       int userID = args.getId();
       System.out.println("Lost track of user " + userID);
       //remove the pathMapping for user
-      userPatches.remove(userID - 1);
       // remove user from the gesture detectors (NEW)
       userSkels.remove(userID);    
       gestSeqs.removeUser(userID);
