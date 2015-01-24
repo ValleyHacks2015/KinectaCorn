@@ -6,11 +6,12 @@ import java.lang.ProcessBuilder;
 public class ChuckConnector {
 	
 	static String starter[] = {"chuck", "--loop"};
-	String path = "/usr/share/doc/chuck/examples/"; //TODO UPDATE THIS
+	//String path = "/usr/share/doc/chuck/examples/"; //TODO UPDATE THIS
+	String path = "/home/bhalpin//Downloads/chuck-1.3.5.0/examples/";
 		
 	
 	//Starts the initial loop for ChucK
-	public static void start() throws IOException {
+	public void start() throws IOException {
 		ProcessBuilder startChuck = new ProcessBuilder("chuck", "--loop");
 		try {
 			startChuck.start();
@@ -21,7 +22,22 @@ public class ChuckConnector {
 	}
 		
 	public void add(String input) {
+		/*
 		ProcessBuilder addShred = new ProcessBuilder("chuck", "+", path + input);
+		try {
+			addShred.start();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		try {
+			System.out.println(input);
+			Process p1 = Runtime.getRuntime().exec(input);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void remove(String input) {

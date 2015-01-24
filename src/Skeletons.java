@@ -30,7 +30,7 @@ public class Skeletons
 
 
   private BufferedImage headImage;    // image that's drawn over the head joint
-
+  
   // OpenNI
   private UserGenerator userGen;
   private DepthGenerator depthGen;
@@ -52,7 +52,8 @@ public class Skeletons
   // gesture detectors  (NEW)
   private GestureSequences gestSeqs;
   private SkeletonsGestures skelsGests;
-
+  
+  public ArrayList<PatchMap> userPatches = new ArrayList<PatchMap>();
 
 
   public Skeletons(UserGenerator userGen, DepthGenerator depthGen, GesturesWatcher watcher)
@@ -389,7 +390,9 @@ public class Skeletons
       System.out.println("Detected new user " + args.getId());
       try {
         // try to detect a pose for the new user
-        poseDetectionCap.StartPoseDetection(calibPoseName, args.getId());   // big-S ?
+        poseDetectionCap.StartPoseDetection(calibPoseName, args.getId());// big-S ?
+        //add new patch mapper for user
+        userPatches.add(args.getId(), new PatchMap(args.getId()));//TODO make sure this works!
       }
       catch (StatusException e)
       { e.printStackTrace(); }
@@ -404,7 +407,8 @@ public class Skeletons
     { 
       int userID = args.getId();
       System.out.println("Lost track of user " + userID);
-
+      //remove the pathMapping for user
+      userPatches.remove(userID);
       // remove user from the gesture detectors (NEW)
       userSkels.remove(userID);    
       gestSeqs.removeUser(userID);
