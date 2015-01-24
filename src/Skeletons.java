@@ -388,11 +388,13 @@ public class Skeletons
     public void update(IObservable<UserEventArgs> observable, UserEventArgs args)
     {
       System.out.println("Detected new user " + args.getId());
+    //add new patch mapper for user
+      
       try {
         // try to detect a pose for the new user
         poseDetectionCap.StartPoseDetection(calibPoseName, args.getId());// big-S ?
-        //add new patch mapper for user
-        userPatches.add(args.getId(), new PatchMap(args.getId()));//TODO make sure this works!
+        
+        
       }
       catch (StatusException e)
       { e.printStackTrace(); }
@@ -408,7 +410,7 @@ public class Skeletons
       int userID = args.getId();
       System.out.println("Lost track of user " + userID);
       //remove the pathMapping for user
-      userPatches.remove(userID);
+      userPatches.remove(userID - 1);
       // remove user from the gesture detectors (NEW)
       userSkels.remove(userID);    
       gestSeqs.removeUser(userID);
@@ -449,7 +451,7 @@ public class Skeletons
           // calibration succeeeded; move to skeleton tracking
           System.out.println("Starting tracking user " + userID);
           skelCap.startTracking(userID);
-
+          userPatches.add(userID - 1, new PatchMap(userID));//TODO make sure this works!
           // add user to the gesture detectors (NEW)
           userSkels.put(new Integer(userID),
                      new HashMap<SkeletonJoint, SkeletonJointPosition>());  

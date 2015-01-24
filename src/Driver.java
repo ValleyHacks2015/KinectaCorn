@@ -10,18 +10,15 @@ import java.io.*;
 public class Driver extends JFrame {
 
 	private UserTracker trackPanel;
-	public static ChuckConnector CHUCK_CONNECTOR = new ChuckConnector();//TODO make sure this works!
 	public Driver() {
 		super("User Tracker");
 		
 		Container c = getContentPane();
 		c.setLayout(new BorderLayout());
-		try {
-			CHUCK_CONNECTOR.start();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
+		//start chuck server
+		(new ChuckCommander("bash /media/data/kinect/Kinectacorn/startChuck.sh")).start();
+		
 		trackPanel = new UserTracker();
 		c.add(trackPanel, BorderLayout.CENTER);
 		

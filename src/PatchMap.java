@@ -4,8 +4,9 @@ import java.util.HashMap;
 
 
 public class PatchMap {
-
+	boolean DEBUG = true;
 	int userID;
+	ChuckConnector chuckConnector;
 	//ArrayList<GestureName> gestureList = new ArrayList<GestureName>();
 	//ArrayList<String> shredList; //TODO initialize <---
 	HashMap<GestureName, String> gestureToShred = new HashMap<GestureName, String>();
@@ -20,21 +21,37 @@ public class PatchMap {
 	public PatchMap(int userID)
 	{
 		this.userID = userID;
+		chuckConnector = new ChuckConnector();
+		loadDefaultMapping(userID);
+		if(DEBUG) System.out.println("Loading default mapping");
 	}
 	
 	
 	
+	private void loadDefaultMapping(int userID) {
+		//TODO add defaults to rethinkDB
+		if(userID == 1){
+			gestureToShred.put(GestureName.RH_UP, "lead.ck");
+			gestureToShred.put(GestureName.RH_OUT, "break_lead.ck");
+			gestureToShred.put(GestureName.LH_UP, "pad.ck");
+			gestureToShred.put(GestureName.LEAN_LEFT, "harmony.ck");
+		}else if(userID == 2){
+			gestureToShred.put(GestureName.RH_UP, "drum_beat.ck");
+			gestureToShred.put(GestureName.RH_OUT, "drum_break.ck");
+			
+		}
+		
+		
+	}
+
+
+
 	public static void main (String[] args)
 	{
-		Driver.CHUCK_CONNECTOR = new ChuckConnector();
-		try {
-			Driver.CHUCK_CONNECTOR.start();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		PatchMap pTemp = new PatchMap(1);
-		Driver.CHUCK_CONNECTOR.add("otf_05.ck");
+		//start chuck server
+		//(new ChuckCommander("bash /media/data/kinect/Kinectacorn/startChuck.sh")).start();
+		PatchMap p = new PatchMap(1);
+		p.searchGestures(GestureName.RH_DOWN);
 	}
 	
 	
@@ -43,7 +60,7 @@ public class PatchMap {
 	 * @param shredName 
 	 */
 	public void sendShred(String shredName){
-		Driver.CHUCK_CONNECTOR.add(shredName);
+		chuckConnector.add(shredName);
 		
 		
 	}

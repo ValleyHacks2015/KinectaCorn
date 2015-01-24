@@ -5,9 +5,10 @@ import java.lang.ProcessBuilder;
 
 public class ChuckConnector {
 	
+	
 	static String starter[] = {"chuck", "--loop"};
 	//String path = "/usr/share/doc/chuck/examples/"; //TODO UPDATE THIS
-	String path = "/home/bhalpin//Downloads/chuck-1.3.5.0/examples/";
+	String path = "/media/data/kinect/Kinectacorn/shreds/";
 		
 	
 	//Starts the initial loop for ChucK
@@ -31,29 +32,28 @@ public class ChuckConnector {
 			e.printStackTrace();
 		}
 		*/
-		try {
-			System.out.println(input);
-			Process p1 = Runtime.getRuntime().exec(input);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String s = "chuck + " + path + input;
+		(new ChuckCommander(s)).start();
 	}
 	
+	
+	
 	public void remove(String input) {
-		ProcessBuilder removeShred = new ProcessBuilder("chuck", "-", path + input);
+		//TODO add integer argument to remove specific shred
+		(new ChuckCommander("chuck --remove")).start();
 	}
 	
 	public void halt() {
-		ProcessBuilder haltShred = new ProcessBuilder("chuck", "halt");
+		//TODO does not do what is expected!
+		(new ChuckCommander("chuck --halt")).start();
 	}
 	
 	public void killChuck() {
-		ProcessBuilder kill = new ProcessBuilder("chuck", "kill");
+		(new ChuckCommander("chuck --kill")).start();
 	}
 	
 	public void removeAllShreds() {
-		ProcessBuilder removeAll = new ProcessBuilder("chuck", "remove.all");
+		(new ChuckCommander("chuck --removeall")).start();
 	}
 	
 	public static void main(String args[]) {

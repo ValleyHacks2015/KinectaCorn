@@ -23,6 +23,10 @@ public class UserTracker extends JPanel implements Runnable, GesturesWatcher
 {
   private static final int MAX_DEPTH_SIZE = 10000;  
 
+  private String[] shreds = {"harmony.ck", "silence.ck",
+		  "bass_hit.ck", "drum_beat.ck", "lead.ck",
+		  "bass_hit_trip.ck", "drum_break.ck", "pad2.ck",
+		  "break_lead.ck", "harmony2.ck", "pad.ck"};
   private Color USER_COLORS[] = {
     Color.RED, Color.BLUE, Color.CYAN, Color.GREEN,
     Color.MAGENTA, Color.PINK, Color.YELLOW, Color.WHITE};
@@ -51,7 +55,8 @@ public class UserTracker extends JPanel implements Runnable, GesturesWatcher
       /* used to create a labeled depth map, where each pixel holds a user ID
          (1, 2, etc.), or 0 to mean it is part of the background
       */
-
+  private ChuckConnector chuckConnector = new ChuckConnector();
+  
   private Skeletons skels;   // the users' skeletons
 
 
@@ -297,11 +302,19 @@ public class UserTracker extends JPanel implements Runnable, GesturesWatcher
   public void pose(int userID, GestureName gest, boolean isActivated)
   // called by the gesture detectors
   {
-    if (isActivated)
+    if (isActivated){
       System.out.println(gest + " " + userID + " on");
-    
-    else
+      PatchMap map = skels.userPatches.get(userID - 1);
+      if(gest == GestureName.HANDS_NEAR){
+    	  System.out.println("Removing all shreds!");
+    	  chuckConnector.removeAllShreds();
+      }else{
+    	  map.searchGestures(gest);
+      }
+      
+    }else{
       System.out.println("                        " + gest + " " + userID + " off");
+    }
   }  // end of pose()
 
 } // end of Driver class
