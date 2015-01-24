@@ -53,7 +53,7 @@ public class Skeletons
   private GestureSequences gestSeqs;
   private SkeletonsGestures skelsGests;
   
-  public ArrayList<PatchMap> userPatches = new ArrayList<PatchMap>();
+  public HashMap<Integer, PatchMap> userPatches = new HashMap<Integer, PatchMap>();
 
 
   public Skeletons(UserGenerator userGen, DepthGenerator depthGen, GesturesWatcher watcher)
@@ -450,7 +450,7 @@ public class Skeletons
           // calibration succeeeded; move to skeleton tracking
           System.out.println("Starting tracking user " + userID);
           skelCap.startTracking(userID);
-          userPatches.add(userID - 1, new PatchMap(userID));//TODO make sure this works!
+          userPatches.put(userID, new PatchMap(userID));//TODO make sure this works!
           // add user to the gesture detectors (NEW)
           userSkels.put(new Integer(userID),
                      new HashMap<SkeletonJoint, SkeletonJointPosition>());  

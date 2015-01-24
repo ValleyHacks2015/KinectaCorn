@@ -30,14 +30,15 @@ public class PatchMap {
 	
 	private void loadDefaultMapping(int userID) {
 		//TODO add defaults to rethinkDB
-		if(userID == 2){
+		if(userID == 1){
 			gestureToShred.put(GestureName.RH_UP, "lead.ck");
 			gestureToShred.put(GestureName.RH_OUT, "break_lead.ck");
 			gestureToShred.put(GestureName.LH_UP, "pad.ck");
 			gestureToShred.put(GestureName.LEAN_LEFT, "harmony.ck");
-		}else if(userID == 1){
+		}else if(userID == 2){
 			gestureToShred.put(GestureName.RH_UP, "drum_beat.ck");
 			gestureToShred.put(GestureName.RH_OUT, "drum_break.ck");
+			gestureToShred.put(GestureName.LH_UP, "bass_hit_trip.ck");
 			
 		}
 		
