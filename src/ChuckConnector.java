@@ -6,9 +6,9 @@ import java.lang.ProcessBuilder;
 public class ChuckConnector {
 	
 	
-	static String starter[] = {"chuck", "--loop"};
+	static String ip = "@192.168.44.13";
 	//String path = "/usr/share/doc/chuck/examples/"; //TODO UPDATE THIS
-	String path = "/media/data/kinect/Kinectacorn/shreds/";
+	String path = "/home/mike/Documents/workspace/Kinectacorn/shreds/";
 		
 	
 	//Starts the initial loop for ChucK
@@ -32,7 +32,7 @@ public class ChuckConnector {
 			e.printStackTrace();
 		}
 		*/
-		String s = "chuck + " + path + input;
+		String s = "chuck " + ip + " + " + path + input;
 		(new ChuckCommander(s)).start();
 	}
 	
@@ -40,20 +40,20 @@ public class ChuckConnector {
 	
 	public void remove(String input) {
 		//TODO add integer argument to remove specific shred
-		(new ChuckCommander("chuck --remove")).start();
+		(new ChuckCommander("chuck "+ ip + " --remove")).start();
 	}
 	
 	public void halt() {
 		//TODO does not do what is expected!
-		(new ChuckCommander("chuck --halt")).start();
+		(new ChuckCommander("chuck " + ip + " --halt")).start();
 	}
 	
 	public void killChuck() {
-		(new ChuckCommander("chuck --kill")).start();
+		(new ChuckCommander("chuck " + ip + " --kill")).start();
 	}
 	
 	public void removeAllShreds() {
-		(new ChuckCommander("chuck --removeall")).start();
+		(new ChuckCommander("chuck " + ip + " --removeall")).start();
 	}
 	
 	public static void main(String args[]) {

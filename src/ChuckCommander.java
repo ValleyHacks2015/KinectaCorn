@@ -20,7 +20,7 @@ public class ChuckCommander extends Thread{
 
     public static void main(String args[]) {
         (new ChuckCommander("bash /media/data/kinect/Kinectacorn/startChuck.sh")).start();
-        (new ChuckCommander("chuck + /home/bhalpin/Downloads/chuck-1.3.5.0/examples/otf_06.ck")).start();
+        (new ChuckCommander("chuck + /home/mike/Downloads/chuck-1.3.5.0/examples/otf_06.ck")).start();
     }
 
 	
