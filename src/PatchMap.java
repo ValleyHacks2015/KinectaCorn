@@ -97,7 +97,6 @@ public class PatchMap {
 		if (gestureToShred.containsKey(gName))
 		{
 			String shredName = gestureToShred.get(gName);
-			
 			return shredName;
 			
 			

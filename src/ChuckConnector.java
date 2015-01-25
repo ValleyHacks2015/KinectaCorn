@@ -27,7 +27,7 @@ public class ChuckConnector {
 	}
 		
 	public void add(String input) {
-		String s = "chuck " + ip + path + input;
+		String s = "chuck " + ip + " + " + path + input;
 		(new ChuckCommander(s)).start();
 	}
 	
