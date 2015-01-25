@@ -360,8 +360,9 @@ public class Skeletons
     Point3D massCenter = depthGen.convertRealWorldToProjective(
                                                 userGen.getUserCoM(userID));
     String label = null;
+    PatchMap map = userPatches.get(userID);
     if (skelCap.isSkeletonTracking(userID))     // tracking
-      label = new String("Tracking user " + userID);
+      label = new String("UID: " + userID + " " + map.getLastGesture());
     else if (skelCap.isSkeletonCalibrating(userID))  // calibrating
       label = new String("Calibrating user " + userID);
     else    // pose detection

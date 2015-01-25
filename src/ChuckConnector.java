@@ -8,7 +8,8 @@ public class ChuckConnector {
 	
 	static String ip = "@192.168.44.13";
 	//String path = "/usr/share/doc/chuck/examples/"; //TODO UPDATE THIS
-	String path = "/home/mike/Documents/workspace/Kinectacorn/shreds/";
+	//String path = "/home/mike/Documents/workspace/Kinectacorn/shreds/";
+	String path = "/media/data/kinect/Kinectacorn/shreds/";
 		
 	
 	//Starts the initial loop for ChucK

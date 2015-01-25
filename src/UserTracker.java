@@ -22,7 +22,7 @@ import java.nio.ShortBuffer;
 public class UserTracker extends JPanel implements Runnable, GesturesWatcher
 {
   private static final int MAX_DEPTH_SIZE = 10000;  
-
+  private ArrayList<String> currentShreds = new ArrayList<String>();
   private String[] shreds = {"harmony.ck", "silence.ck",
 		  "bass_hit.ck", "drum_beat.ck", "lead.ck",
 		  "bass_hit_trip.ck", "drum_break.ck", "pad2.ck",
@@ -284,6 +284,11 @@ public class UserTracker extends JPanel implements Runnable, GesturesWatcher
   {
 	  g2d.setColor(Color.BLUE);
     int panelHeight = getHeight();
+    int lineHeight = 15;
+    for(String s: currentShreds){
+    	g2d.drawString(s, 5, lineHeight);
+    	lineHeight += 15;
+    }
     if (imageCount > 0) {
       double avgGrabTime = (double) totalTime / imageCount;
 	    g2d.drawString("Pic " + imageCount + "  " +
@@ -308,8 +313,12 @@ public class UserTracker extends JPanel implements Runnable, GesturesWatcher
       if(gest == GestureName.HANDS_NEAR){
     	  System.out.println("Removing all shreds!");
     	  chuckConnector.removeAllShreds();
+    	  currentShreds = new ArrayList<String>();
       }else{
-    	  map.searchGestures(gest);
+    	  String s;
+    	 if((s = map.searchGestures(gest)) != null){
+    		currentShreds.add(userID + ": " + s); 
+    	 }
       }
       
     }else{

@@ -6,6 +6,7 @@ import java.util.HashMap;
 public class PatchMap {
 	boolean DEBUG = true;
 	int userID;
+	private String lastGesture;
 	ChuckConnector chuckConnector;
 	//ArrayList<GestureName> gestureList = new ArrayList<GestureName>();
 	//ArrayList<String> shredList; //TODO initialize <---
@@ -85,19 +86,21 @@ public class PatchMap {
 		
 	}
 	
-	public boolean searchGestures(GestureName gName){
+	public String searchGestures(GestureName gName){
 		//search gestureList
 		if (gestureToShred.containsKey(gName))
 		{
 			String shredName = gestureToShred.get(gName);
 			if (shredName != null)
 			{
+				lastGesture = gName.toString();
 				sendShred(shredName);
+				return shredName;
 			}
 			
-			return true;
+			
 		}
-		return false;
+		return null;
 		
 		//if match found
 		//query hashmap for shred to send
@@ -105,6 +108,9 @@ public class PatchMap {
 		//else do nothing
 	}
 	
+	public String getLastGesture(){
+		return lastGesture;
+	}
 	
 	public int getUserID() {
 		return userID;
