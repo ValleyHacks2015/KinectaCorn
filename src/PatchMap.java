@@ -58,7 +58,7 @@ public class PatchMap {
 		//start chuck server
 		//(new ChuckCommander("bash /media/data/kinect/Kinectacorn/startChuck.sh")).start();
 		PatchMap p = new PatchMap(1);
-		p.searchGestures(GestureName.RH_DOWN);
+		//p.searchGestures(GestureName.RH_DOWN);
 	}
 	
 	
@@ -91,26 +91,27 @@ public class PatchMap {
 		
 	}
 	
-	public String searchGestures(GestureName gName){
+	public String checkGestures(GestureName gName){
 		//search gestureList
+		lastGesture = gName.toString();
 		if (gestureToShred.containsKey(gName))
 		{
 			String shredName = gestureToShred.get(gName);
-			if (shredName != null)
-			{
-				lastGesture = gName.toString();
-				sendShred(shredName);
-				return shredName;
-			}
+			
+			return shredName;
 			
 			
 		}
 		return null;
 		
-		//if match found
-		//query hashmap for shred to send
-		//sendShred
-		//else do nothing
+		
+	}
+	
+	public void addShred(String shredName){
+		if (shredName != null)
+		{
+			sendShred(shredName);	
+		}
 	}
 	
 	public String getLastGesture(){

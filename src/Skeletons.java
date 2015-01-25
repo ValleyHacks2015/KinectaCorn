@@ -4,12 +4,16 @@
 
 
 import java.awt.*;
+
 import javax.swing.*;
+
 import java.awt.image.*;
 import java.awt.geom.*;
 import java.awt.color.*;
 import java.io.*;
+
 import javax.imageio.*;
+
 import java.util.*;
 
 import org.OpenNI.*;
@@ -386,7 +390,7 @@ public class Skeletons
 
   class NewUserObserver implements IObserver<UserEventArgs>
   {
-    public void update(IObservable<UserEventArgs> observable, UserEventArgs args)
+	public void update(IObservable<UserEventArgs> observable, UserEventArgs args)
     {
       System.out.println("Detected new user " + args.getId());
     //add new patch mapper for user

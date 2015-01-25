@@ -316,8 +316,12 @@ public class UserTracker extends JPanel implements Runnable, GesturesWatcher
     	  currentShreds = new ArrayList<String>();
       }else{
     	  String s;
-    	 if((s = map.searchGestures(gest)) != null){
-    		currentShreds.add(userID + ": " + s); 
+    	 if((s = map.checkGestures(gest)) != null){
+    		 if(currentShreds.contains(s) && !s.equals("harm_conductor.ck")){
+    			 //do nothing!
+    		 }else{
+    			 currentShreds.add(userID + ": " + s); 
+    		 }
     	 }
       }
       
