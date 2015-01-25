@@ -17,7 +17,7 @@ public class Driver extends JFrame {
 		c.setLayout(new BorderLayout());
 		
 		//start chuck server
-		(new ChuckCommander("bash /home/mike/Documents/workspace/Kinectacorn/startChuck.sh")).start();
+		//(new ChuckCommander("bash /home/mike/Documents/workspace/Kinectacorn/startChuck.sh")).start();
 		
 		trackPanel = new UserTracker();
 		c.add(trackPanel, BorderLayout.CENTER);
