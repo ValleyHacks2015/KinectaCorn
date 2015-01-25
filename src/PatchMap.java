@@ -36,13 +36,13 @@ public class PatchMap {
 			gestureToShred.put(GestureName.RH_OUT, "break_lead.ck");
 			gestureToShred.put(GestureName.LH_UP, "pad.ck");
 			gestureToShred.put(GestureName.LEAN_LEFT, "harmony.ck");
+			gestureToShred.put(GestureName.TURN_LEFT, "Dyno-limit.ck");
 		} else if(userID == 2){
 			gestureToShred.put(GestureName.RH_UP, "drum_beat.ck");
 			gestureToShred.put(GestureName.RH_OUT, "drum_break.ck");
 			gestureToShred.put(GestureName.LH_UP, "bass_hit_trip.ck");
 			gestureToShred.put(GestureName.LEAN_RIGHT, "harmony.ck");
 		} else if(userID == 3) {
-			gestureToShred.put(GestureName.LEAN_LEFT, "machine.ck");
 			gestureToShred.put(GestureName.RH_OUT, "LiSa-munger2.ck");
 			gestureToShred.put(GestureName.LEAN_FWD, "powerup.ck");
 			gestureToShred.put(GestureName.LH_UP, "pad2.ck");
