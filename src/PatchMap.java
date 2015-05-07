@@ -6,6 +6,7 @@ import java.util.HashMap;
 public class PatchMap {
 	boolean DEBUG = true;
 	int userID;
+	int mapping;
 	private String lastGesture;
 	ChuckConnector chuckConnector;
 	//ArrayList<GestureName> gestureList = new ArrayList<GestureName>();
@@ -22,44 +23,46 @@ public class PatchMap {
 	public PatchMap(int userID)
 	{
 		this.userID = userID;
+		mapping = 1;
 		chuckConnector = new ChuckConnector();
-		loadDefaultMapping(userID);
+		loadDefaultMapping();
 		if(DEBUG) System.out.println("Loading default mapping");
 	}
 	
 	
 	
-	private void loadDefaultMapping(int userID) {
+	public void loadDefaultMapping() {
+		
 		//TODO add defaults to rethinkDB
-		if(userID == 1){
-			gestureToShred.put(GestureName.RH_UP, "lead.ck");
+		if(mapping == 1){
+			gestureToShred.put(GestureName.RH_DOWN, "lead.ck");
 			gestureToShred.put(GestureName.RH_OUT, "break_lead.ck");
-			gestureToShred.put(GestureName.LH_UP, "pad.ck");
-			gestureToShred.put(GestureName.LEAN_LEFT, "harmony.ck");
-			gestureToShred.put(GestureName.TURN_LEFT, "Dyno-limit.ck");
-		} else if(userID == 2){
-			gestureToShred.put(GestureName.RH_UP, "drum_beat.ck");
+			gestureToShred.put(GestureName.LH_DOWN, "harmony.ck");
+			gestureToShred.put(GestureName.LEAN_LEFT, "LiSa-munger2.ck");
+			gestureToShred.put(GestureName.LH_OUT, "harmony2.ck");
+			gestureToShred.put(GestureName.LEAN_RIGHT, "powerup.ck");
+		} else if(mapping == 2){
+			gestureToShred.put(GestureName.RH_DOWN, "drum_beat.ck");
 			gestureToShred.put(GestureName.RH_OUT, "drum_break.ck");
-			gestureToShred.put(GestureName.LH_UP, "bass_hit_trip.ck");
+			gestureToShred.put(GestureName.LH_DOWN, "bass_hit_trip.ck");
+			gestureToShred.put(GestureName.LH_DOWN, "powerup.ck");
 			gestureToShred.put(GestureName.LEAN_RIGHT, "harmony.ck");
-		} else if(userID == 3) {
-			gestureToShred.put(GestureName.RH_OUT, "LiSa-munger2.ck");
-			gestureToShred.put(GestureName.LEAN_FWD, "powerup.ck");
-			gestureToShred.put(GestureName.LH_UP, "pad2.ck");
+			gestureToShred.put(GestureName.LEAN_LEFT, "harmony2.ck");
+		} else if(mapping == 3) {
+			gestureToShred.put(GestureName.RH_DOWN, "LiSa-munger2.ck");
+			gestureToShred.put(GestureName.LH_DOWN, "powerup.ck");
+			gestureToShred.put(GestureName.LH_OUT, "pad2.ck");
 			
+		}
+		mapping++;
+		if(mapping > 1){
+			mapping = 1;
 		}
 		
 	}
 
 
 
-	public static void main (String[] args)
-	{
-		//start chuck server
-		//(new ChuckCommander("bash /media/data/kinect/Kinectacorn/startChuck.sh")).start();
-		PatchMap p = new PatchMap(1);
-		//p.searchGestures(GestureName.RH_DOWN);
-	}
 	
 	
 	/**
@@ -97,6 +100,7 @@ public class PatchMap {
 		if (gestureToShred.containsKey(gName))
 		{
 			String shredName = gestureToShred.get(gName);
+			sendShred(shredName);
 			return shredName;
 			
 			

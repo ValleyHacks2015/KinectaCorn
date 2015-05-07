@@ -312,14 +312,14 @@ public class UserTracker extends JPanel implements Runnable, GesturesWatcher
       PatchMap map = skels.userPatches.get(userID);
       if(gest == GestureName.HANDS_NEAR){
     	  System.out.println("Removing all shreds!");
+    	  map.loadDefaultMapping();
     	  chuckConnector.removeAllShreds();
     	  currentShreds = new ArrayList<String>();
       }else{
     	  String s;
     	 if((s = map.checkGestures(gest)) != null){
     		 
-    			 currentShreds.add(userID + ": " + s); 
-    			 map.addShred(s);
+    		 currentShreds.add(userID + ": " + s); 
     		 
     	 }
       }
