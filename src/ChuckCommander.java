@@ -1,4 +1,8 @@
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+
+import org.omg.CORBA_2_3.portable.InputStream;
 
 
 public class ChuckCommander extends Thread{
@@ -10,10 +14,20 @@ public class ChuckCommander extends Thread{
 		this.command = command;
 	}
 	
+	void copy(java.io.InputStream inputStream, PrintStream out) throws IOException{
+		while(true){
+			int c = inputStream.read();
+			if(c == -1) break;
+			out.write((char)c);
+		}
+		
+	}
+	
     public void run() {
     	try {
 			System.out.println(command);
 			Process p1 = Runtime.getRuntime().exec(command);
+			copy(p1.getInputStream(), System.out);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

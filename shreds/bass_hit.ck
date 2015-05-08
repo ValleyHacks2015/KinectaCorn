@@ -1,4 +1,4 @@
-2::second => dur T;
+.5::second => dur T;
 T - (now % T) => now;
 
 SndBuf strong => Gain b => dac;

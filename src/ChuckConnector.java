@@ -6,8 +6,7 @@ import java.lang.ProcessBuilder;
 public class ChuckConnector {
 	
 	
-	static String ip = "@192.168.44.13";
-	//String path = "/usr/share/doc/chuck/examples/"; //TODO UPDATE THIS
+	String ip = "localhost";
 
 
 	//String path = "/media/data/kinect/Kinectacorn/shreds/";
@@ -17,13 +16,8 @@ public class ChuckConnector {
 	
 	//Starts the initial loop for ChucK
 	public void start() throws IOException {
-		ProcessBuilder startChuck = new ProcessBuilder("chuck", "--loop");
-		try {
-			startChuck.start();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String s = "chuck --loop";
+		(new ChuckCommander(s)).start();
 	}
 		
 	public void add(String input) {
@@ -51,7 +45,30 @@ public class ChuckConnector {
 		(new ChuckCommander("chuck " + ip + " --removeall")).start();
 	}
 	
+	
+	
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
 	public static void main(String args[]) {
+		ChuckConnector ck = new ChuckConnector();
+		
+			ck.add("bass_hit.ck");
 		
 	}
+	
+	
 }

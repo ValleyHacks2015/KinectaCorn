@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 
 public class PatchMap {
@@ -24,7 +25,12 @@ public class PatchMap {
 	{
 		this.userID = userID;
 		mapping = 1;
+		
 		chuckConnector = new ChuckConnector();
+		//System.out.println("Specify ip adress for chuck server (leave blank for localhost):");
+		//Scanner in = new Scanner(System.in);
+		//String ip = in.next();
+		//if (!ip.equals("")) chuckConnector.setIp(ip);
 		loadDefaultMapping();
 		if(DEBUG) System.out.println("Loading default mapping");
 	}
@@ -126,6 +132,18 @@ public class PatchMap {
 	}
 	public void setUserID(int userID) {
 		this.userID = userID;
+	}
+
+
+
+	public int getMapping() {
+		return mapping;
+	}
+
+
+
+	public void setMapping(int mapping) {
+		this.mapping = mapping;
 	}
 
 	

@@ -3,6 +3,9 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+#Gedit temp files
+*~
+
 # Package Files #
 *.jar
 *.war
