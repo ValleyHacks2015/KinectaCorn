@@ -3,13 +3,19 @@
 // Based off Andrew Davison's open source code
 
 import java.awt.*;
+
 import javax.swing.*;
+
 import java.awt.image.*;
 import java.awt.geom.*;
 import java.awt.color.*;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.io.*;
+
 import javax.imageio.*;
+
 import java.util.*;
 
 import org.OpenNI.*;
@@ -27,6 +33,8 @@ public class UserTracker extends JPanel implements Runnable, GesturesWatcher
 		  "bass_hit.ck", "drum_beat.ck", "lead.ck",
 		  "bass_hit_trip.ck", "drum_break.ck", "pad2.ck",
 		  "break_lead.ck", "harmony2.ck", "pad.ck"};
+  private long startTime = System.currentTimeMillis();
+  private long lastAddition = startTime;
   private Color USER_COLORS[] = {
     Color.RED, Color.BLUE, Color.CYAN, Color.GREEN,
     Color.MAGENTA, Color.PINK, Color.YELLOW, Color.WHITE};
@@ -144,7 +152,7 @@ public class UserTracker extends JPanel implements Runnable, GesturesWatcher
       {  System.out.println(e); 
          System.exit(1);
       }
-	    long startTime = System.currentTimeMillis();
+	  startTime = System.currentTimeMillis();
       updateUserDepths();
       skels.update();
       imageCount++;
@@ -308,24 +316,35 @@ public class UserTracker extends JPanel implements Runnable, GesturesWatcher
   // called by the gesture detectors
   {
     if (isActivated){
-      System.out.println(gest + " " + userID + " on");
+      if(Driver.DEBUG) System.out.println(gest + " " + userID + " on");
       PatchMap map = skels.userPatches.get(userID);
+      long now = System.currentTimeMillis();
+      
       if(gest == GestureName.HANDS_NEAR){
     	  System.out.println("Removing all shreds!");
-    	  map.loadDefaultMapping();
     	  chuckConnector.removeAllShreds();
-    	  currentShreds = new ArrayList<String>();
+    	  for(String s: currentShreds){
+    		  currentShreds.remove(s);
+    	  }
+      }else if (gest == GestureName.TURN_RIGHT || gest == GestureName.TURN_LEFT){
+    	  map.loadDefaultMapping();
+    	  System.out.println("Switching mapping");
       }else{
     	  String s;
-    	 if((s = map.checkGestures(gest)) != null){
-    		 
-    		 currentShreds.add(userID + ": " + s); 
-    		 
-    	 }
+    	 
+     	 if(((s = map.checkGestures(gest)) != null)){ 
+     		lastAddition = System.currentTimeMillis();
+     		Date date = new Date(lastAddition); 
+     		DateFormat formatter = new SimpleDateFormat("HH:mm:ss:SSS");
+     		String dateFormatted = formatter.format(date);
+     		 System.out.println(s + " @ " + dateFormatted);
+     		 currentShreds.add(userID + ": " + s); 
+     		 
+     	 }
       }
       
     }else{
-      System.out.println("                        " + gest + " " + userID + " off");
+      if(Driver.DEBUG) System.out.println("                        " + gest + " " + userID + " off");
     }
   }  // end of pose()
 

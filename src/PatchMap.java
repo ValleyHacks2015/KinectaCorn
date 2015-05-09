@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 
 public class PatchMap {
-	boolean DEBUG = true;
+	
 	int userID;
 	int mapping;
 	private String lastGesture;
@@ -24,7 +24,7 @@ public class PatchMap {
 	public PatchMap(int userID)
 	{
 		this.userID = userID;
-		mapping = 1;
+		mapping = 2;
 		
 		chuckConnector = new ChuckConnector();
 		//System.out.println("Specify ip adress for chuck server (leave blank for localhost):");
@@ -32,36 +32,37 @@ public class PatchMap {
 		//String ip = in.next();
 		//if (!ip.equals("")) chuckConnector.setIp(ip);
 		loadDefaultMapping();
-		if(DEBUG) System.out.println("Loading default mapping");
+		System.out.println("Loading default mapping");
 	}
 	
 	
 	
 	public void loadDefaultMapping() {
-		
+		if(Driver.DEBUG) System.out.println("New mapping: " + mapping);
 		//TODO add defaults to rethinkDB
 		if(mapping == 1){
 			gestureToShred.put(GestureName.RH_DOWN, "lead.ck");
 			gestureToShred.put(GestureName.RH_OUT, "break_lead.ck");
 			gestureToShred.put(GestureName.LH_DOWN, "harmony.ck");
-			gestureToShred.put(GestureName.LEAN_LEFT, "LiSa-munger2.ck");
 			gestureToShred.put(GestureName.LH_OUT, "harmony2.ck");
-			gestureToShred.put(GestureName.LEAN_RIGHT, "powerup.ck");
+			//gestureToShred.put(GestureName.LEAN_RIGHT, "powerup.ck");
+			//gestureToShred.put(GestureName.LEAN_LEFT, "LiSa-munger2.ck");
 		} else if(mapping == 2){
 			gestureToShred.put(GestureName.RH_DOWN, "drum_beat.ck");
 			gestureToShred.put(GestureName.RH_OUT, "drum_break.ck");
 			gestureToShred.put(GestureName.LH_DOWN, "bass_hit_trip.ck");
-			gestureToShred.put(GestureName.LH_DOWN, "powerup.ck");
-			gestureToShred.put(GestureName.LEAN_RIGHT, "harmony.ck");
-			gestureToShred.put(GestureName.LEAN_LEFT, "harmony2.ck");
+			gestureToShred.put(GestureName.LH_OUT, "powerup.ck");
+			//gestureToShred.put(GestureName.LEAN_RIGHT, "harmony.ck");
+			//gestureToShred.put(GestureName.LEAN_LEFT, "harmony2.ck");
 		} else if(mapping == 3) {
 			gestureToShred.put(GestureName.RH_DOWN, "LiSa-munger2.ck");
+			gestureToShred.put(GestureName.RH_OUT, "bass_hit_trip.ck");
 			gestureToShred.put(GestureName.LH_DOWN, "powerup.ck");
 			gestureToShred.put(GestureName.LH_OUT, "pad2.ck");
 			
 		}
 		mapping++;
-		if(mapping > 1){
+		if(mapping > 3){
 			mapping = 1;
 		}
 		

@@ -25,7 +25,7 @@ public class ChuckCommander extends Thread{
 	
     public void run() {
     	try {
-			System.out.println(command);
+			if(Driver.DEBUG)System.out.println(command);
 			Process p1 = Runtime.getRuntime().exec(command);
 			copy(p1.getInputStream(), System.out);
 		} catch (IOException e) {

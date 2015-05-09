@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.io.*;
 
 public class Driver extends JFrame {
-
+	public static boolean DEBUG = false;
 	private UserTracker trackPanel;
 	public Driver() {
 		super("User Tracker");
